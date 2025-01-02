@@ -1,0 +1,10 @@
+Ingredient	Commodity Index	Estimated Price Impact
+Beef Chuck Roast	Live Cattle	10%
+Egg Noodles	Wheat	5%
+Butter	Milk	7%
+Green Onions	Vegetables	3%
+Flour	Wheat	5%
+Beef Broth	Beef	10%
+Mushrooms	Vegetables	3%
+Sour Cream	Milk	7%
+White Wine	Grapes	4%
