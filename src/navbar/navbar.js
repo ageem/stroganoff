@@ -11,6 +11,9 @@ function Navbar(){
                 <li className='link'>
                     <Link to='/stroganomics'>stroganomics</Link>
                 </li>
+                <li className='link'>
+                    <Link to='/stroganoffai'>stroganoff ai</Link>
+                </li>
             </ul>
         </nav>
     );
