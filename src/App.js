@@ -4,6 +4,7 @@ import Navbar from './navbar/navbar';
 import LandingPage from './landing_page/landing_page';
 import Stroganomics from './stroganomics/stroganomics';
 import StroganoffAi from './stroganoff_ai/stroganoff_ai';
+import Gallery from './gallery/gallery'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/stroganomics" element={<Stroganomics />} />
           <Route path="/stroganoffai" element={<StroganoffAi />} />
+          <Route path="/gallery" element={<Gallery />} />
         </Routes>
       </BrowserRouter>
     </div>
