@@ -5,6 +5,7 @@ import LandingPage from './landing_page/landing_page';
 import Stroganomics from './stroganomics/stroganomics';
 import StroganoffAi from './stroganoff_ai/stroganoff_ai';
 import Gallery from './gallery/gallery'
+import StroganoffConfessions from './confessions/confessions';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/stroganomics" element={<Stroganomics />} />
           <Route path="/stroganoffai" element={<StroganoffAi />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/confessions" element={<StroganoffConfessions />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -17,6 +17,9 @@ function Navbar(){
                 <li className='link'>
                     <Link to='/gallery'>gallery</Link>
                 </li>
+                <li className='link'>
+                    <Link to='/confessions'>strogaoff confessions</Link>
+                </li>
             </ul>
         </nav>
     );
