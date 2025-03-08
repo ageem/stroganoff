@@ -1,5 +1,5 @@
 import './landing_page.css';
-import StroganuffCow from './Stroganuff_cow1.png';
+import StroganuffCow from './STROGANUFF_COW_2.png';
 
 function LandingPage() {
     return (
