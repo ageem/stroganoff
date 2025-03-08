@@ -1,0 +1,23 @@
+.stroganoff_index {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fafafa;
+    padding: 2rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    color: #444;
+  }
+  
+  @media screen and (max-width: 768px) {
+    h2 {
+      font-size: 1.5rem;
+    }
+  
+    .stroganoff_index {
+      padding: 1rem;
+    }
+  }
+  
