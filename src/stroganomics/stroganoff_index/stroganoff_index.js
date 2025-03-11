@@ -33,11 +33,11 @@ const commodityIds = {
 };
 
 const weights = {
-  beef: 0.3,
-  wheat: 0.2,
-  milk: 0.2,
-  vegetables: 0.2,
-  grapes: 0.1
+  beef: 0.5,
+  wheat: 0.24,
+  milk: 0.08,
+  vegetables: 0.14,
+  grapes: 0.04
 };
 
 const fetchCommodityData = async (commodityId) => {

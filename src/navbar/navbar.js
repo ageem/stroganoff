@@ -9,16 +9,16 @@ function Navbar(){
             </div> 
             <ul>
                 <li className='link'>
-                    <Link to='/stroganomics'>stroganomics</Link>
+                    <Link to='/stroganomics'>Stroganomics</Link>
                 </li>
                 <li className='link'>
-                    <Link to='/stroganoffai'>stroganoff ai</Link>
+                    <Link to='/stroganoffai'>Stroganoff Ai</Link>
                 </li>
                 <li className='link'>
-                    <Link to='/gallery'>gallery</Link>
+                    <Link to='/gallery'>Gallery</Link>
                 </li>
                 <li className='link'>
-                    <Link to='/confessions'>strogaoff confessions</Link>
+                    <Link to='/confessions'>Stroganoff Confessions</Link>
                 </li>
             </ul>
         </nav>
