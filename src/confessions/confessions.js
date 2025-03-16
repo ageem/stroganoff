@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const data = [
+const confessionsData = [
   {
     "username": "StroganoffLover123",
     "confession": "I always sneak a spoonful of stroganoff straight from the pot when no one is looking."
@@ -204,18 +204,86 @@ const data = [
 ];
 
 const Confession = ({ username, confession }) => (
-  <div className="confession">
-    <h3>{username}</h3>
-    <p>{confession}</p>
+  <div className="bg-white rounded-lg shadow-md p-6 mb-4 transform transition duration-300 hover:shadow-lg hover:-translate-y-1">
+    <h3 className="text-lg font-bold text-amber-700 mb-2 flex items-center">
+      <svg className="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 005 10a6 6 0 0012 0c0-.35-.035-.691-.1-1.02A5 5 0 0010 11z" clipRule="evenodd"></path>
+      </svg>
+      {username}
+    </h3>
+    <p className="text-gray-700 italic">{confession}</p>
   </div>
 );
 
-const StroganoffConfessions = () => (
-  <div className="confessions-list">
-    {data.map((post, index) => (
-      <Confession key={index} username={post.username} confession={post.confession} />
-    ))}
-  </div>
-);
+const StroganoffConfessions = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [visibleConfessions, setVisibleConfessions] = useState(10);
+  
+  const filteredConfessions = confessionsData.filter(post => 
+    post.username.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    post.confession.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
+  const displayedConfessions = filteredConfessions.slice(0, visibleConfessions);
+  
+  const loadMore = () => {
+    setVisibleConfessions(prev => prev + 10);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-amber-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Stroganoff <span className="text-amber-600">Confessions</span>
+          </h1>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Read anonymous confessions from stroganoff enthusiasts around the world. What's your stroganoff secret?
+          </p>
+        </div>
+        
+        <div className="mb-8">
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <input
+              type="text"
+              placeholder="Search confessions..."
+              className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {displayedConfessions.map((post, index) => (
+            <Confession key={index} username={post.username} confession={post.confession} />
+          ))}
+        </div>
+        
+        {visibleConfessions < filteredConfessions.length && (
+          <div className="text-center mt-8">
+            <button 
+              onClick={loadMore}
+              className="bg-amber-600 hover:bg-amber-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300 shadow-md hover:shadow-lg"
+            >
+              Load More Confessions
+            </button>
+          </div>
+        )}
+        
+        {filteredConfessions.length === 0 && (
+          <div className="text-center py-10">
+            <p className="text-gray-500 text-lg">No confessions found matching your search.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default StroganoffConfessions;
