@@ -5,20 +5,35 @@ function LandingPage() {
     return (
         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
             {/* Hero Section */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto text-center">
-                    <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-8">
-                        Welcome to <span className="text-amber-600">Stroganoff</span>
-                    </h1>
-                    <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto">
-                        The ultimate destination for Stroganoff enthusiasts. Discover the perfect blend of tradition and innovation in every bite.
-                    </p>
-                    <div className="relative mx-auto max-w-3xl mb-16">
-                        <img 
-                            src={StroganuffCow} 
-                            alt="Stroganuff Cow" 
-                            className="rounded-xl shadow-2xl transform transition duration-500 hover:scale-105"
-                        />
+            <section className="relative py-12 lg:py-20 overflow-hidden">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        {/* Content */}
+                        <div className="text-center lg:text-left">
+                            <h1 className="text-4xl lg:text-6xl font-extrabold text-gray-900 mb-6 animate-fade-in">
+                                Welcome to <span className="text-amber-600">Stroganoff</span>
+                            </h1>
+                            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                                The ultimate destination for Stroganoff enthusiasts. Discover the perfect blend of tradition and innovation in every bite.
+                            </p>
+                            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+                                <button className="bg-amber-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-700 transition-all duration-300 transform hover:scale-105">
+                                    Get Started
+                                </button>
+                                <button className="bg-gray-100 text-gray-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-200 transition-all duration-300 border border-gray-200">
+                                    Learn More
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Image */}
+                        <div className="hero-image-container rounded-2xl shadow-2xl overflow-hidden">
+                            <img 
+                                src={StroganuffCow} 
+                                alt="Stroganuff Cow" 
+                                className="w-full h-auto transform transition duration-500 hover:scale-105"
+                            />
+                        </div>
                     </div>
                 </div>
             </section>
