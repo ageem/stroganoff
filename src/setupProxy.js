@@ -7,8 +7,9 @@ module.exports = function(app) {
       target: 'https://api.stlouisfed.org',
       changeOrigin: true,
       pathRewrite: {
-        '^/api': '',
+        '^/api': ''
       },
+      logLevel: 'debug'
     })
   );
 };
