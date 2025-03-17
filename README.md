@@ -3,12 +3,8 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/ageem/stroganoff/main/docs/assets/stroganoff-hero.png" alt="Stroganoff Hero" width="800"/>
 
-  <h2 style="font-style: italic; margin-top: 20px;">
-    The ultimate destination for Stroganoff enthusiasts.
-  </h2>
-  <h3 style="font-weight: 600; margin-top: 10px;">
-    Discover the perfect blend of tradition and innovation in every bite.
-  </h3>
+  <h2 style="font-style: italic; margin-top: 20px;">The ultimate destination for Stroganoff enthusiasts.</h2>
+  <h3 style="font-weight: 600; margin-top: 10px;">Discover the perfect blend of tradition and innovation in every bite.</h3>
 </div>
 
 ## Features
