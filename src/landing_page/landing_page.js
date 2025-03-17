@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import StroganuffCow from './STROGANUFF_COW_2.png';
+import './landing_page.css';
 
 function LandingPage() {
+    useEffect(() => {
+        // Add the visible class to trigger animations after component mounts
+        const timer = setTimeout(() => {
+            document.querySelector('.hero-content').classList.add('visible');
+        }, 100);
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
             {/* Hero Section */}
@@ -9,14 +18,14 @@ function LandingPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         {/* Content */}
-                        <div className="text-center lg:text-left">
-                            <h1 className="text-4xl lg:text-6xl font-extrabold text-gray-900 mb-6 animate-fade-in">
+                        <div className="hero-content text-center lg:text-left opacity-0">
+                            <h1 className="hero-title text-4xl lg:text-6xl font-extrabold text-gray-900 mb-6">
                                 Welcome to <span className="text-amber-600">Stroganoff</span>
                             </h1>
-                            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                            <p className="hero-text text-xl text-gray-600 mb-8 leading-relaxed">
                                 The ultimate destination for Stroganoff enthusiasts. Discover the perfect blend of tradition and innovation in every bite.
                             </p>
-                            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+                            <div className="hero-buttons flex flex-wrap gap-4 justify-center lg:justify-start">
                                 <button className="bg-amber-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-700 transition-all duration-300 transform hover:scale-105">
                                     Get Started
                                 </button>
@@ -27,12 +36,14 @@ function LandingPage() {
                         </div>
 
                         {/* Image */}
-                        <div className="hero-image-container rounded-2xl shadow-2xl overflow-hidden">
-                            <img 
-                                src={StroganuffCow} 
-                                alt="Stroganuff Cow" 
-                                className="w-full h-auto transform transition duration-500 hover:scale-105"
-                            />
+                        <div className="hero-image">
+                            <div className="rounded-2xl shadow-2xl overflow-hidden">
+                                <img 
+                                    src={StroganuffCow} 
+                                    alt="Stroganuff Cow" 
+                                    className="w-full h-auto transform transition duration-500 hover:scale-105"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
