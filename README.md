@@ -44,6 +44,7 @@ Visit [http://localhost:3000](http://localhost:3000) to view the app in developm
 ## 🛠️ Technologies
 
 - React.js
+- Tailwind CSS for styling
 - Chart.js for data visualization
 - Google Gemini AI API
 - FRED Economic Data API
