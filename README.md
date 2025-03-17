@@ -3,10 +3,12 @@
 <div align="center">
   <img src="docs/assets/stroganoff-hero.png" alt="Stroganoff Hero" width="800"/>
 
-  <h2>
-    <em>The ultimate destination for Stroganoff enthusiasts.</em><br/>
-    <strong>Discover the perfect blend of tradition and innovation in every bite.</strong>
+  <h2 style="font-style: italic; margin-top: 20px;">
+    The ultimate destination for Stroganoff enthusiasts.
   </h2>
+  <h3 style="font-weight: 600; margin-top: 10px;">
+    Discover the perfect blend of tradition and innovation in every bite.
+  </h3>
 </div>
 
 ## Features
