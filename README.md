@@ -1,7 +1,7 @@
 # Stroganoff
 
 <div align="center">
-  <img src="docs/assets/stroganoff-hero.png" alt="Stroganoff Hero" width="800"/>
+  <img src="public/images/stroganoff-hero.png" alt="Stroganoff Hero" width="800"/>
 
   <h2 style="font-style: italic; margin-top: 20px;">
     The ultimate destination for Stroganoff enthusiasts.
