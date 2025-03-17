@@ -180,6 +180,7 @@ const StroganoffIndex = () => {
 
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top',
@@ -192,6 +193,15 @@ const StroganoffIndex = () => {
     scales: {
       y: {
         beginAtZero: false
+      },
+      x: {
+        grid: {
+          display: true
+        },
+        ticks: {
+          maxRotation: 45,
+          minRotation: 45
+        }
       }
     }
   };
@@ -222,7 +232,7 @@ const StroganoffIndex = () => {
   }
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg">
+    <div className="bg-white rounded-lg">
       <h2 className="text-2xl font-bold text-gray-900 mb-4">Stroganoff Index</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         {currentValue && (
@@ -240,7 +250,7 @@ const StroganoffIndex = () => {
           </div>
         )}
       </div>
-      <div className="w-full h-[400px]">
+      <div className="w-full h-[500px] relative">
         <Line data={chartData} options={chartOptions} />
       </div>
     </div>
