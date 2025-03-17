@@ -1,4 +1,19 @@
-# Getting Started with Create React App
+# Stroganoff
+
+<div align="center">
+  <img src="src/landing_page/STROGANUFF_COW_2.png" alt="Stroganoff Hero" width="600"/>
+</div>
+
+The ultimate destination for Stroganoff enthusiasts. Discover the perfect blend of tradition and innovation in every bite.
+
+## Features
+
+- **Stroganomics**: Track global Stroganoff trends and market analysis
+- **Stroganoff AI**: Get personalized Stroganoff recommendations using cutting-edge AI
+- **Gallery**: Browse through our curated collection of Stroganoff images
+- **Confessions**: Share your Stroganoff stories with fellow enthusiasts
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -68,5 +83,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-# stroganoff
