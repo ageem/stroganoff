@@ -5,14 +5,68 @@
 
   <h2 style="font-style: italic; margin-top: 20px;">The ultimate destination for Stroganoff enthusiasts.</h2>
   <h3 style="font-weight: 600; margin-top: 10px;">Discover the perfect blend of tradition and innovation in every bite.</h3>
+
+  <p><a href="https://stroganoff.vercel.app/" target="_blank">🚀 Visit Stroganoff Live Site</a></p>
 </div>
 
-## Features
+## 🌟 Features
 
-- **Stroganomics**: Track global Stroganoff trends and market analysis
-- **Stroganoff AI**: Get personalized Stroganoff recommendations using cutting-edge AI
-- **Gallery**: Browse through our curated collection of Stroganoff images
-- **Confessions**: Share your Stroganoff stories with fellow enthusiasts
+- **🎯 Stroganomics**: Track global Stroganoff trends and market analysis using real-time FRED economic data
+- **🤖 Stroganoff AI**: Get personalized Stroganoff recommendations powered by Google's Gemini AI
+- **🖼️ Gallery**: Browse through our curated collection of mouthwatering Stroganoff images
+- **💭 Confessions**: Share your Stroganoff stories with fellow enthusiasts
+
+## 🚀 Quick Start
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ageem/stroganoff.git
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the root directory with your API keys:
+   ```
+   REACT_APP_FRED_API_KEY=your_fred_api_key
+   REACT_APP_GEMINI_API_KEY=your_gemini_api_key
+   ```
+
+4. Start the development server:
+   ```bash
+   npm start
+   ```
+
+Visit [http://localhost:3000](http://localhost:3000) to view the app in development mode.
+
+## 🛠️ Technologies
+
+- React.js
+- Chart.js for data visualization
+- Google Gemini AI API
+- FRED Economic Data API
+- Vercel for deployment
+
+## 📦 Production Build
+
+Create an optimized production build:
+```bash
+npm run build
+```
+
+## 🌐 Deployment
+
+This project is deployed on Vercel with continuous deployment from the main branch. Environment variables must be configured in your Vercel project settings.
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to open issues and submit pull requests.
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Getting Started with Create React App
 
