@@ -1,10 +1,13 @@
 # Stroganoff
 
 <div align="center">
-  <img src="src/landing_page/STROGANUFF_COW_2.png" alt="Stroganoff Hero" width="600"/>
-</div>
+  <img src="docs/assets/stroganoff-hero.png" alt="Stroganoff Hero" width="800"/>
 
-The ultimate destination for Stroganoff enthusiasts. Discover the perfect blend of tradition and innovation in every bite.
+  <h2>
+    <em>The ultimate destination for Stroganoff enthusiasts.</em><br/>
+    <strong>Discover the perfect blend of tradition and innovation in every bite.</strong>
+  </h2>
+</div>
 
 ## Features
 
