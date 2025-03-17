@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -116,12 +118,47 @@ const calculateStroganoffIndex = (data, weights) => {
   return result;
 };
 
+const DATE_RANGE_PRESETS = {
+  '3M': { label: 'Last 3 Months', days: 90 },
+  '6M': { label: 'Last 6 Months', days: 180 },
+  '1Y': { label: 'Last Year', days: 365 },
+  'ALL': { label: 'All Time', days: null }
+};
+
 const StroganoffIndex = () => {
   const [indexData, setIndexData] = useState([]);
   const [currentValue, setCurrentValue] = useState(null);
   const [recentChange, setRecentChange] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [startDate, setStartDate] = useState(new Date(2020, 0, 1));
+  const [endDate, setEndDate] = useState(new Date());
+  const [selectedPreset, setSelectedPreset] = useState('ALL');
+
+  const handlePresetClick = (presetKey) => {
+    setSelectedPreset(presetKey);
+    const preset = DATE_RANGE_PRESETS[presetKey];
+    
+    let newStartDate;
+    if (presetKey === 'YTD') {
+      newStartDate = new Date(new Date().getFullYear(), 0, 1);
+    } else if (preset.days) {
+      newStartDate = new Date();
+      newStartDate.setDate(newStartDate.getDate() - preset.days);
+    } else {
+      newStartDate = new Date(2020, 0, 1); // Default start date
+    }
+    
+    setStartDate(newStartDate);
+    setEndDate(new Date());
+  };
+
+  const filterDataByDateRange = (data) => {
+    return data.filter(item => {
+      const itemDate = new Date(item.date);
+      return itemDate >= startDate && itemDate <= endDate;
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -167,17 +204,6 @@ const StroganoffIndex = () => {
     fetchData();
   }, []);
 
-  const chartData = {
-    labels: indexData.map(d => d.date),
-    datasets: [{
-      label: 'Stroganoff Index',
-      data: indexData.map(d => d.value),
-      fill: false,
-      borderColor: 'rgb(255, 99, 132)',
-      tension: 0.1
-    }]
-  };
-
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -206,6 +232,25 @@ const StroganoffIndex = () => {
     }
   };
 
+  const handleExportCSV = () => {
+    // Convert filtered data to CSV format
+    const csvData = [
+      ['Date', 'Stroganoff Index Value'], // Header row
+      ...filteredData.map(item => [item.date, item.value.toFixed(2)])
+    ].map(row => row.join(',')).join('\n');
+
+    // Create blob and download link
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `stroganoff-index-${startDate.toISOString().split('T')[0]}-to-${endDate.toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -231,9 +276,87 @@ const StroganoffIndex = () => {
     );
   }
 
+  const filteredData = filterDataByDateRange(indexData);
+  const chartData = {
+    labels: filteredData.map(d => d.date),
+    datasets: [{
+      label: 'Stroganoff Index',
+      data: filteredData.map(d => d.value),
+      fill: false,
+      borderColor: 'rgb(255, 99, 132)',
+      tension: 0.1
+    }]
+  };
+
   return (
     <div className="bg-white rounded-lg">
       <h2 className="text-2xl font-bold text-gray-900 mb-4">Stroganoff Index</h2>
+      
+      {/* Date Range Controls - All in one line */}
+      <div className="mb-6">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center gap-4">
+            {/* Preset Buttons */}
+            {Object.entries(DATE_RANGE_PRESETS).map(([key, { label }]) => (
+              <button
+                key={key}
+                onClick={() => handlePresetClick(key)}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors
+                  ${selectedPreset === key
+                    ? 'bg-amber-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+              >
+                {label}
+              </button>
+            ))}
+
+            {/* Date Pickers */}
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-700">From:</span>
+              <DatePicker
+                selected={startDate}
+                onChange={date => {
+                  setStartDate(date);
+                  setSelectedPreset(null);
+                }}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                className="px-3 py-2 border rounded-md text-sm"
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-700">To:</span>
+              <DatePicker
+                selected={endDate}
+                onChange={date => {
+                  setEndDate(date);
+                  setSelectedPreset(null);
+                }}
+                selectsEnd
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+                className="px-3 py-2 border rounded-md text-sm"
+              />
+            </div>
+          </div>
+
+          {/* Export Button */}
+          <button
+            onClick={handleExportCSV}
+            className="px-4 py-2 bg-gray-800 text-white rounded-md text-sm font-medium hover:bg-gray-700 transition-colors flex items-center gap-2"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Export CSV
+          </button>
+        </div>
+      </div>
+
+      {/* Current Value and Recent Change */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         {currentValue && (
           <div className="bg-gray-50 p-4 rounded-lg">
@@ -250,6 +373,8 @@ const StroganoffIndex = () => {
           </div>
         )}
       </div>
+
+      {/* Chart */}
       <div className="w-full h-[500px] relative">
         <Line data={chartData} options={chartOptions} />
       </div>
