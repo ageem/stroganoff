@@ -49,7 +49,7 @@ const fetchCommodityData = async (commodityId) => {
     
     // Construct the URL with parameters
     const baseUrl = process.env.NODE_ENV === 'production' 
-      ? 'https://api.stlouisfed.org/fred/series/observations'
+      ? '/api/fred'
       : '/api/fred/series/observations';
     const params = new URLSearchParams({
       series_id: commodityId,
@@ -64,14 +64,7 @@ const fetchCommodityData = async (commodityId) => {
     const url = `${baseUrl}?${params}`;
     console.log('Request URL:', url);
 
-    const config = process.env.NODE_ENV === 'production' ? {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET',
-      }
-    } : {};
-
-    const response = await axios.get(url, config);
+    const response = await axios.get(url);
     console.log(`Response received for ${commodityId}:`, response.status);
     
     if (!response.data || !response.data.observations) {
