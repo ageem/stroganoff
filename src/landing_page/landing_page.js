@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import StroganuffCow from './STROGANUFF_COW_2.png';
 import './landing_page.css';
 
@@ -26,9 +27,9 @@ function LandingPage() {
                                 The ultimate destination for Stroganoff enthusiasts. Discover the perfect blend of tradition and innovation in every bite.
                             </p>
                             <div className="hero-buttons flex flex-wrap gap-4 justify-center lg:justify-start">
-                                <button className="bg-amber-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-700 transition-all duration-300 transform hover:scale-105">
+                                <Link to="/stroganomics" className="bg-amber-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-amber-700 transition-all duration-300 transform hover:scale-105">
                                     Get Started
-                                </button>
+                                </Link>
                                 <button className="bg-gray-100 text-gray-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-200 transition-all duration-300 border border-gray-200">
                                     Learn More
                                 </button>
