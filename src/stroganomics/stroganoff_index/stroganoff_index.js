@@ -48,11 +48,9 @@ const fetchCommodityData = async (commodityId) => {
     console.log(`Fetching data for commodity ID ${commodityId}`);
     
     // Construct the URL with parameters
-    const baseUrl = '/api/fred/series/observations';
+    const baseUrl = '/api/fred';
     const params = new URLSearchParams({
       series_id: commodityId,
-      api_key: FRED_API_KEY,
-      file_type: 'json',
       observation_start: '2020-01-01',
       frequency: 'm',
       sort_order: 'desc',
