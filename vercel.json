@@ -6,6 +6,10 @@
       "dest": "/static/$1"
     },
     {
+      "src": "/api/fred/direct",
+      "dest": "/api/fred-proxy.js"
+    },
+    {
       "src": "/api/fred/(.*)",
       "dest": "/api/fred.js"
     },
@@ -31,7 +35,13 @@
     }
   ],
   "env": {
-    "REACT_APP_FRED_API_KEY": "@fred_api_key",
-    "REACT_APP_GEMINI_API_KEY": "@gemini_api_key"
+    "REACT_APP_FRED_API_KEY": "@react_app_fred_api_key",
+    "REACT_APP_GEMINI_API_KEY": "@react_app_gemini_api_key"
+  },
+  "build": {
+    "env": {
+      "REACT_APP_FRED_API_KEY": "@react_app_fred_api_key",
+      "REACT_APP_GEMINI_API_KEY": "@react_app_gemini_api_key"
+    }
   }
 } 
