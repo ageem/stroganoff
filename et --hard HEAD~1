@@ -1,0 +1,5 @@
+[33md7f409a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Improve FRED API integration with direct serverless proxy and better error handling
+[33m887f3d2[m Add Vercel serverless function for FRED API and update configuration
+[33m3e3d6e4[m Update project state with current changes
+[33ma1b6c29[m Fix CORS issues for React app on Vercel
+[33m256f0af[m Fix CORS issues with Vercel API routes

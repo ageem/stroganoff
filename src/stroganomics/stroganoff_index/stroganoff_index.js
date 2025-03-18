@@ -26,9 +26,6 @@ ChartJS.register(
 
 const FRED_API_KEY = process.env.REACT_APP_FRED_API_KEY;
 
-// Test if the API key is available
-console.log('FRED API key available:', !!FRED_API_KEY);
-
 // Updated commodity IDs with simpler FRED series
 const commodityIds = {
   beef: 'WPU022104',      // Producer Price Index by Commodity: Processed Foods and Feeds: Beef and Veal
@@ -50,26 +47,27 @@ const fetchCommodityData = async (commodityId) => {
   try {
     console.log(`Fetching data for commodity ID ${commodityId}`);
     
-    if (!FRED_API_KEY) {
-      console.error('FRED API key is missing. Check environment variables.');
-      throw new Error('FRED API key is missing. Check environment variables.');
-    }
-    
-    // Use the direct endpoint instead
-    const url = `/api/fred/direct?series_id=${commodityId}`;
-    console.log(`Making request to ${url}`);
+    // Construct the URL with parameters
+    const baseUrl = '/api/fred/series/observations';
+    const params = new URLSearchParams({
+      series_id: commodityId,
+      api_key: FRED_API_KEY,
+      file_type: 'json',
+      observation_start: '2020-01-01',
+      frequency: 'm',
+      sort_order: 'desc',
+      limit: '100'
+    });
+
+    const url = `${baseUrl}?${params}`;
+    console.log('Request URL:', url);
 
     const response = await axios.get(url);
     console.log(`Response received for ${commodityId}:`, response.status);
     
-    if (!response.data) {
-      console.error(`No data returned for ${commodityId}`);
-      throw new Error(`No data returned for ${commodityId}`);
-    }
-    
-    if (!response.data.observations) {
+    if (!response.data || !response.data.observations) {
       console.error(`Invalid response format for ${commodityId}:`, response.data);
-      throw new Error(`Invalid response format for ${commodityId}: observations not found`);
+      return [];
     }
 
     const filteredData = response.data.observations
@@ -80,12 +78,7 @@ const fetchCommodityData = async (commodityId) => {
       }))
       .sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    if (filteredData.length === 0) {
-      console.warn(`No usable data points for ${commodityId}`);
-    } else {
-      console.log(`Successfully processed ${filteredData.length} data points for ${commodityId}`);
-    }
-    
+    console.log(`Successfully processed ${filteredData.length} data points for ${commodityId}`);
     return filteredData;
   } catch (error) {
     console.error(`Error fetching data for ${commodityId}:`, error.message);
@@ -93,10 +86,11 @@ const fetchCommodityData = async (commodityId) => {
       console.error(`Response details for ${commodityId}:`, {
         status: error.response.status,
         statusText: error.response.statusText,
-        data: error.response.data
+        data: error.response.data,
+        url: error.config.url
       });
     }
-    throw error; // Re-throw to let the parent handler deal with it
+    return [];
   }
 };
 
@@ -173,22 +167,13 @@ const StroganoffIndex = () => {
         setError(null);
         
         console.log('Starting to fetch commodity data...');
-        console.log('Using FRED API Key:', FRED_API_KEY ? 'Key is present (length: ' + FRED_API_KEY.length + ')' : 'Key is missing');
-        
-        if (!FRED_API_KEY) {
-          throw new Error('FRED API key is missing. Please check your environment variables.');
-        }
+        console.log('Using FRED API Key:', FRED_API_KEY ? 'Key is present' : 'Key is missing');
         
         const dataPromises = Object.entries(commodityIds).map(([name, id]) => 
-          fetchCommodityData(id)
-            .then(data => {
-              console.log(`Fetched ${data.length} records for ${name}`);
-              return data;
-            })
-            .catch(error => {
-              console.error(`Failed to fetch ${name} data:`, error.message);
-              return []; // Return empty array for this commodity to prevent Promise.all from failing
-            })
+          fetchCommodityData(id).then(data => {
+            console.log(`Fetched ${data.length} records for ${name}`);
+            return data;
+          })
         );
 
         const data = await Promise.all(dataPromises);
@@ -196,17 +181,11 @@ const StroganoffIndex = () => {
           `${Object.keys(commodityIds)[i]}: ${d.length} records`
         ));
 
-        // Count total records
-        const totalRecords = data.reduce((sum, arr) => sum + arr.length, 0);
-        if (totalRecords === 0) {
-          throw new Error('No data available for any commodities. Please check your API key and network connection.');
-        }
-
         const stroganoffIndex = calculateStroganoffIndex(data, weights);
         console.log('Final index data points:', stroganoffIndex.length);
         
         if (stroganoffIndex.length === 0) {
-          throw new Error('No data available for the Stroganoff Index. This may be due to missing or invalid commodity data.');
+          throw new Error('No data available for the Stroganoff Index. Check console for details.');
         }
 
         setIndexData(stroganoffIndex);

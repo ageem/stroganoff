@@ -1,0 +1,10 @@
+[33mcommit d7f409a70f01f38310c7025be9504ed935a6c7ae[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Your Name <your.email@example.com>
+Date:   Tue Mar 18 11:16:16 2025 -0500
+
+    Improve FRED API integration with direct serverless proxy and better error handling
+
+A	api/fred-proxy.js
+M	api/fred.js
+M	src/stroganomics/stroganoff_index/stroganoff_index.js
+M	vercel.json
