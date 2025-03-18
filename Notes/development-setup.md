@@ -1,5 +1,11 @@
 # Development Setup Notes
 
+## Project Overview
+- This is a **React** project bootstrapped with Create React App (CRA)
+- **NOT** a Next.js project
+- Uses React Router for routing
+- Uses CRACO for webpack customization without ejecting
+
 ## Branches
 - **Main Branch**: Production branch
   - GitHub: https://github.com/ageem/stroganoff/tree/main
@@ -31,7 +37,15 @@ git push origin development
 - Development Preview: https://stroganoff-git-development-mike-agees-projects.vercel.app/
 - GitHub Repository: https://github.com/ageem/stroganoff
 
+## Technical Stack
+- React (Create React App)
+- React Router for navigation
+- Chart.js for data visualization
+- FRED API for economic data
+- Vercel for deployment
+
 ## Notes
 - Vercel automatically creates preview deployments for each branch
 - The development branch can be used to safely test changes without affecting the production site
-- Always verify changes in the development preview before merging to main 
+- Always verify changes in the development preview before merging to main
+- This is a CRA (Create React App) project - do not use Next.js configurations or patterns 
