@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "buildCommand": "CI=false npm run build",
   "routes": [
     {
       "src": "/api/fred",
@@ -11,6 +12,8 @@
     }
   ],
   "env": {
-    "FRED_API_KEY": "@fred_api_key"
+    "FRED_API_KEY": "@fred_api_key",
+    "GENERATE_SOURCEMAP": "false",
+    "CI": "false"
   }
 } 

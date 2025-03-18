@@ -60,11 +60,32 @@ const fetchCommodityData = async (commodityId) => {
     const url = `${baseUrl}?${params}`;
     console.log('Request URL:', url);
 
-    const response = await axios.get(url);
-    console.log(`Response received for ${commodityId}:`, response.status);
+    console.log('Making request with headers:', {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+
+    const response = await axios.get(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    });
+    
+    console.log(`Response received for ${commodityId}:`, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers,
+      hasData: !!response.data,
+      hasObservations: !!(response.data && response.data.observations)
+    });
     
     if (!response.data || !response.data.observations) {
-      console.error(`Invalid response format for ${commodityId}:`, response.data);
+      console.error(`Invalid response format for ${commodityId}:`, {
+        data: response.data,
+        status: response.status,
+        headers: response.headers
+      });
       return [];
     }
 
@@ -79,15 +100,18 @@ const fetchCommodityData = async (commodityId) => {
     console.log(`Successfully processed ${filteredData.length} data points for ${commodityId}`);
     return filteredData;
   } catch (error) {
-    console.error(`Error fetching data for ${commodityId}:`, error.message);
-    if (error.response) {
-      console.error(`Response details for ${commodityId}:`, {
+    console.error(`Error fetching data for ${commodityId}:`, {
+      message: error.message,
+      name: error.name,
+      stack: error.stack,
+      response: error.response ? {
         status: error.response.status,
         statusText: error.response.statusText,
         data: error.response.data,
-        url: error.config.url
-      });
-    }
+        headers: error.response.headers
+      } : null,
+      request: error.request || null
+    });
     return [];
   }
 };
