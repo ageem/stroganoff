@@ -47,21 +47,37 @@ const fetchCommodityData = async (commodityId) => {
   try {
     console.log(`Fetching data for commodity ID ${commodityId}`);
     
-    // Construct the URL with parameters
-    const baseUrl = process.env.NODE_ENV === 'production' 
-      ? '/api/fred'
-      : '/api/fred/series/observations';
-    const params = new URLSearchParams({
-      series_id: commodityId,
-      api_key: FRED_API_KEY,
-      file_type: 'json',
-      observation_start: '2020-01-01',
-      frequency: 'm',
-      sort_order: 'desc',
-      limit: '100'
-    });
+    // Construct URL and params based on environment
+    let url;
+    let params;
+    
+    if (process.env.NODE_ENV === 'production') {
+      // In production, use the Vercel API endpoint directly
+      url = '/api/fred';
+      params = new URLSearchParams({
+        series_id: commodityId,
+        file_type: 'json',
+        observation_start: '2020-01-01',
+        frequency: 'm',
+        sort_order: 'desc',
+        limit: '100'
+      }).toString();
+      url = `${url}?${params}`;
+    } else {
+      // In development, use the proxy setup
+      url = '/api/fred/series/observations';
+      params = new URLSearchParams({
+        series_id: commodityId,
+        api_key: FRED_API_KEY,
+        file_type: 'json',
+        observation_start: '2020-01-01',
+        frequency: 'm',
+        sort_order: 'desc',
+        limit: '100'
+      }).toString();
+      url = `${url}?${params}`;
+    }
 
-    const url = `${baseUrl}?${params}`;
     console.log('Request URL:', url);
 
     const response = await axios.get(url);
